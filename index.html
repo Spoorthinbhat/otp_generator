@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Generator</title>
+    <style>
+        h1 {
+            font-size: 5.4vw;
+            text-shadow: 2px 8px 7px rgba(0, 0, 0, 0.51);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+            background-image: linear-gradient(326deg, #000000 0%, #ce203c 74%);
+            font-family: "Caveat", cursive;
+
+
+        }
+
+        .box {
+            border-style: solid;
+            border: 3px;
+            width: 45%;
+            height: 65%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: aliceblue;
+            -webkit-box-shadow: 47px 42px 19px -3px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 47px 42px 19px -3px rgba(0, 0, 0, 0.75);
+            box-shadow: 47px 42px 19px -3px rgba(0, 0, 0, 0.75);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            padding-bottom: 4vw;
+        }
+
+        .otpbox {
+            border-style: solid;
+            width: 60%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4eced;
+            font-style: oblique;
+            font-weight: 500;
+            font-size: 1.6em;
+        }
+
+        button {
+            width: 40%;
+            font-size: 1.4vw;
+            background-color: #cb1735;
+            color: white;
+            box-shadow: 8px 10px 16px 3px rgba(0, 0, 0, 0.69);
+            -webkit-box-shadow: 8px 10px 16px 3px rgba(0, 0, 0, 0.69);
+            -moz-box-shadow: 8px 10px 16px 3px rgba(0, 0, 0, 0.69);
+        }
+
+        button:hover {
+            box-shadow: none;
+            transition-duration: 0.6s;
+            border: 2px solid black;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkbox {
+            font-size: 2.3vw;
+            margin-top: 2vh;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1> OTP Generator</h1>
+        <!-- <br> -->
+        <div class="center">
+            <div class="otpbox">
+                <p id="show"></p>
+            </div>
+            <br>
+            <div class="checkbox">
+                <input type="checkbox" id="Numeric" name="Numeric" value=1>
+                <label for="Numeric">Numeric</label>
+                <input type="checkbox" id="alphabet" name="alphabet" value=2>
+                <label for="alphabet">Alphabet</label>
+                <input type="checkbox" id="Symbol" name="Symbol" value=3>
+                <label for="Symbol">Symbol</label>
+            </div>
+            <br>
+            <button onclick="generate()">Generate OTP</button>
+        </div>
+    </div>
+    <script>
+        let digits = '';
+        let num = 0;
+        let count = 0;
+        function check() {
+            num = 0;
+            digits = '';
+            let X = document.getElementById("Numeric");
+            let Y = document.getElementById("alphabet");
+            let Z = document.getElementById("Symbol");
+
+            if (X.checked) {
+                digits += '1234567890';
+                num += 10;
+            }
+            if (Y.checked) {
+                digits += 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                num += 52;
+            }
+            if (Z.checked) {
+                digits += '!@#$%^&*-_+';
+                num += 10;
+            }
+
+        }
+
+        function generate() {
+            check();
+            let otp = '';
+            if (digits.length == 0) {
+                alert("Select at least one option");
+                return;
+            }
+            for (let i = 0; i < 6; i++) {
+                otp += digits[Math.floor(Math.random() * num)];
+            }
+            document.getElementById("show").innerHTML = otp;
+
+        }
+    </script>
+</body>
